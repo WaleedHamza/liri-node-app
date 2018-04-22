@@ -6,13 +6,14 @@ exports.twitterKeys = {
     access_token_key: process.env.TWITTER_ACCESS_TOKEN_KEY,
     access_token_secret: process.env.TWITTER_ACCESS_TOKEN_SECRET
 }
-
+// console.log(twitterKeys)
 exports.spotifyKey = {
-    id : process.env.SPOTIFY_ID,
-    secret : process.env.SPOTIFY_SECRET 
+    id: process.env.SPOTIFY_ID,
+    secret: process.env.SPOTIFY_SECRET 
 }
+// console.log(process.env.SPOTIFY_ID)
 exports.OMDbAPI = {
-    OMDbAPI = "http://www.omdbapi.com/?i=tt3896198&apikey=988d81cc"
+    OMDbAPI: process.env.OMDb
 }
 
 
