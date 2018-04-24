@@ -1,4 +1,4 @@
-console.log("This is loaded");
+// console.log("This is loaded");
 
 exports.twitterKeys = {
     consumer_key: process.env.TWITTER_CONSUMER_KEY,
@@ -13,8 +13,8 @@ exports.spotifyKey = {
 }
 // console.log(process.env.SPOTIFY_ID)
 exports.OMDbAPI = {
-    OMDbAPI: process.env.OMDb
+    OMDbAPI: process.env.OMDbAPIKEY
 }
-
+// console.log(OMDbAPI)
 
 
