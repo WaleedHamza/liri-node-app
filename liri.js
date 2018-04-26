@@ -7,105 +7,98 @@ var data = process.argv;
 var operator = data[2];
 var searchItem = '';
 // console.log(operator);
-    for (var i = 3 ; i < data.length; i ++){
-        if (i > 3 && i < data.length){
-            searchItem  = searchItem + '+' + data[i];
-        }else{
-        searchItem  += data[i]
+for (var i = 3; i < data.length; i++) {
+    if (i > 3 && i < data.length) {
+        searchItem = searchItem + '+' + data[i];
+    } else {
+        searchItem += data[i]
     }
 }
 
-// console.log('');
-// console.log('=====================');
-// console.log(searchItem);
-// console.log('=====================');
-// console.log('');
-
-//===================twitter=========================//
-// function searchTwitter(){
-//     var Twitter = require('twitter')
-//     var myTwittwe = new Twitter({
-//         consumer_key: keys.twitterKeys.consumer_key,
-//         consumer_secret: keys.twitterKeys.consumer_secret,
-//         access_token_key: keys.twitterKeys.access_token_key,
-//         access_token_secret: keys.twitterKeys.access_token_secret
-//     });
-//     console.log(myTwittwe);
-
-//     if ( operator = 'my-tweets'){ //if (searchItem === ''){searchItem = 'robertpope6789'}
-//             myTwittwe.get ('statuses/created_at', { 
-//             // user_id : 'robertpope6789',
-//             screen_name: 'robertpope6789'
-//             // count: 2
-//             },
-//     function(error,tweet, response){
-//         if(error){
-//             console.log('Twitter Error', error)
-
-//         } if (!error && response.statusCode === 200){
-//             console.log('I get here')
-//         }
-//     });
-
-
-// }//end of if statement
-// }//end of searchTwitter Function
-//  searchTwitter();
-    
-
 //=====================OMDb============================//
-function findMovie(){
-    if (operator === 'movie-this'){
+function findMovie() {
+    if (operator === 'movie-this') {
 
-        if(searchItem === ''){searchItem = 'Mr Nobody'}
+        if (searchItem === '') {
+            searchItem = 'Mr Nobody'
+        }
 
-        var OMDb = keys.OMDbAPI.OMDbAPI 
+        var OMDb = keys.OMDbAPI.OMDbAPI
         var request = require("request");
-        var OMDbAPI = "http://www.omdbapi.com/?t=" + searchItem  + "&y=&plot=short&apikey="+OMDb;
+        var OMDbAPI = "http://www.omdbapi.com/?t=" + searchItem + "&y=&plot=short&apike" +
+                "y=" + OMDb;
 
-    request(OMDbAPI, function(error, response, body){
-        var JASON = JSON.parse(body);
-        var rotTomRating = JASON.Ratings && JASON.Ratings[1] ? JASON.Ratings[1].Value : 'No Rotten Tomatoes ratings';
-         if (!error && response.statusCode === 200){
+        request(OMDbAPI, function (error, response, body) {
+            var JASON = JSON.parse(body);
+            var rotTomRating = JASON.Ratings && JASON.Ratings[1]
+                ? JASON
+                    .Ratings[1]
+                    .Value
+                : 'No Rotten Tomatoes ratings';
+            if (!error && response.statusCode === 200) {
 
-            fs.appendFile("log.txt", "\n\r  " + "=====================", (error) => {
-                console.log("======================")
-            })
-            fs.appendFile("log.txt", "\n\r  " + "Movie Title: " + JASON.Title, (error) => {
-                console.log("Movie Title: " + JASON.Title)
-            })
-            fs.appendFile("log.txt", "\n\r  " + "Year the movie came out: " + JASON.Year, (error) => {
-                console.log("Year the movie came out: " + JASON.Year)
-            })
-            fs.appendFile("log.txt", "\n\r  " + "IMDB Rating of the movie: " + JASON.imdbRating, (error) => {
-                console.log("IMDB Rating of the movie: " + JASON.imdbRating)
-            })
-            fs.appendFile("log.txt", "\n\r  " + "Rotten Tomatoes Rating of the movie: " + rotTomRating, (error) => {
-                console.log("Rotten Tomatoes Rating of the movie: " + rotTomRating)
-            })
-            fs.appendFile("log.txt", "\n\r  " + "Country where the movie was produced: " + JASON.Country, (error) => {
-                console.log("Country where the movie was produced: " + JASON.Country)
-            })
-            fs.appendFile("log.txt", "\n\r  " + "Language of the movie: " + JASON.Language, (error) => {
-                console.log("Language of the movie: " + JASON.Language)
-            })
-            fs.appendFile("log.txt", "\n\r  " + "Plot of the movie: " + JASON.Plot, (error) => {
-                console.log("Plot of the movie: " + JASON.Plot)
-            })
-            fs.appendFile("log.txt", "\n\r  " + "Actors in the movie: " + JASON.Actors, (error) => {
-                console.log("Actors in the movie: " + JASON.Actors)
-            })
-            fs.appendFile("log.txt", "\n\r  " + "======================", (error) => {
-                console.log("======================")
-            }) 
+                fs.appendFile("log.txt", "\n\r=====================", (error) => {
+                    console.log("======================")
+                })
+                fs.appendFile("log.txt", "\n\rMovie Title: " + JASON.Title, (error) => {
+                    console.log("Movie Title: " + JASON.Title)
+                })
+                fs.appendFile(
+                    "log.txt",
+                    "\n\rYear the movie came out: " + JASON.Year,
+                    (error) => {
+                        console.log("Year the movie came out: " + JASON.Year)
+                    }
+                )
+                fs.appendFile(
+                    "log.txt",
+                    "\n\rIMDB Rating of the movie: " + JASON.imdbRating,
+                    (error) => {
+                        console.log("IMDB Rating of the movie: " + JASON.imdbRating)
+                    }
+                )
+                fs.appendFile(
+                    "log.txt",
+                    "\n\rRotten Tomatoes Rating of the movie: " + rotTomRating,
+                    (error) => {
+                        console.log("Rotten Tomatoes Rating of the movie: " + rotTomRating)
+                    }
+                )
+                fs.appendFile(
+                    "log.txt",
+                    "\n\rCountry where the movie was produced: " + JASON.Country,
+                    (error) => {
+                        console.log("Country where the movie was produced: " + JASON.Country)
+                    }
+                )
+                fs.appendFile(
+                    "log.txt",
+                    "\n\rLanguage of the movie: " + JASON.Language,
+                    (error) => {
+                        console.log("Language of the movie: " + JASON.Language)
+                    }
+                )
+                fs.appendFile("log.txt", "\n\rPlot of the movie: " + JASON.Plot, (error) => {
+                    console.log("Plot of the movie: " + JASON.Plot)
+                })
+                fs.appendFile(
+                    "log.txt",
+                    "\n\rActors in the movie: " + JASON.Actors,
+                    (error) => {
+                        console.log("Actors in the movie: " + JASON.Actors)
+                    }
+                )
+                fs.appendFile("log.txt", "\n\r======================", (error) => {
+                    console.log("======================")
+                })
 
-    }else { 
-        console.log('this is not working '+ error);
-    }
+            } else {
+                console.log('this is not working ' + error);
+            }
 
-});
-}//end of if statement
-}//end of findMovie Function 
+        });
+    } //end of if statement
+} //end of findMovie Function
 findMovie();
 
 
@@ -133,22 +126,22 @@ function searchSpotify() {
             var previewLink = info.preview_url && info.preview_url
                 ? info.preview_url
                 : 'No preview url available';
-            fs.appendFile("log.txt", "\n\r  " + "===================", (error) => {
+            fs.appendFile("log.txt", "\n\r===================", (error) => {
                 console.log("===================")
             })
-            fs.appendFile("log.txt","\n\r  Artist(s): " + info.album.artists[0].name,(error) => {
+            fs.appendFile("log.txt","\n\rArtist(s): " + info.album.artists[0].name,(error) => {
                     console.log("Artist(s): " + info.album.artists[0].name)
                 })
-            fs.appendFile("log.txt", "\n\r  Track: " + info.name, (error) => {
+            fs.appendFile("log.txt", "\n\rTrack: " + info.name, (error) => {
                 console.log("Track: " + info.name)
             })
-            fs.appendFile("log.txt", "\n\r  Preview URL: " + previewLink, (error) => {
+            fs.appendFile("log.txt", "\n\rPreview URL: " + previewLink, (error) => {
                 console.log("Preview URL: " + previewLink)
             })
-            fs.appendFile("log.txt", "\n\r  Album: " + info.album.name, (error) => {
+            fs.appendFile("log.txt", "\n\rAlbum: " + info.album.name, (error) => {
                 console.log("Album: " + info.album.name)
             })
-            fs.appendFile("log.txt", "\n\r  " + "===================", (error) => {
+            fs.appendFile("log.txt", "\n\r===================", (error) => {
                 console.log("===================")
             })
         });
@@ -176,3 +169,52 @@ function doThis(){
         }
     }
 doThis();
+
+//===================twitter=========================//
+function searchTwitter() {
+    var Twitter = require('twitter')
+    var myTwitter = new Twitter(
+        {consumer_key: keys.twitterKeys.consumer_key, consumer_secret: keys.twitterKeys.consumer_secret, access_token_key: keys.twitterKeys.access_token_key, access_token_secret: keys.twitterKeys.access_token_secret}
+    );
+
+    if (operator = 'my-tweets') {
+        if (searchItem == ' ') {
+            searchItem = 'robertpope6789'
+        }
+        var params = {
+            q: 'robertpope6789',
+            count: 2 //the count is set to 2 due to the limited amount of pulls of the twitter api
+        }
+
+        myTwitter.get('search/tweets', params, gotData)
+
+        function gotData(error, data, response) {
+            if (error) {
+                console.log('i got this far', error)
+            }
+            var tweets = data.statuses;
+            for (var i = 0; i < tweets.length; i++) {
+
+                fs.appendFile("log.txt", "\n\r==================", (error) => {
+                    console.log("==================")
+                    console.log(tweets[i].created_at);
+                });
+
+                fs.appendFile(
+                    "log.txt",
+                    "\n\r I Tweeted : " + tweets[i].text + "\n\r At This Time : " + tweets[i].created_at,
+                    (error) => {
+                        console.log('')
+                    });
+
+                fs.appendFile("log.txt", "\n\r==================", (error) => {
+                    console.log(tweets[i].text);
+                    console.log("==================")
+                });
+            }
+
+        }
+
+    }
+}
+searchTwitter();

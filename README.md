@@ -17,6 +17,7 @@ Liri can take the following commands and returns results in terminal/bash window
        * Language of the movie.
        * Plot of the movie.
        * Actors in the movie.
+       * If no name provided it will default to Mr. Nobody
 
  or
  2- 'node liri.js spotify-this-song '<song name here>''
