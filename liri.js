@@ -2,12 +2,6 @@ require("dotenv").config();
 var Request = require('request')
 var keys = require("./keys.js");
 var fs = require('fs')
-// console.log('=====================');
-// console.log(' ');
-// console.log(client);
-// console.log(' ');
-// console.log('=====================');
-// console.log(OMDb);
 var data = process.argv;
 // console.log(data);
 var operator = data[2];
@@ -30,20 +24,21 @@ var searchItem = '';
 //===================twitter=========================//
 // function searchTwitter(){
 //     var Twitter = require('twitter')
-//     var client = new Twitter({
+//     var myTwittwe = new Twitter({
 //         consumer_key: keys.twitterKeys.consumer_key,
 //         consumer_secret: keys.twitterKeys.consumer_secret,
 //         access_token_key: keys.twitterKeys.access_token_key,
 //         access_token_secret: keys.twitterKeys.access_token_secret
 //     });
+//     console.log(myTwittwe);
 
 //     if ( operator = 'my-tweets'){ //if (searchItem === ''){searchItem = 'robertpope6789'}
-//             client.get ('statuses/created_at', { 
+//             myTwittwe.get ('statuses/created_at', { 
 //             // user_id : 'robertpope6789',
 //             screen_name: 'robertpope6789'
 //             // count: 2
 //             },
-//     function(error,response){
+//     function(error,tweet, response){
 //         if(error){
 //             console.log('Twitter Error', error)
 
@@ -138,8 +133,8 @@ function searchSpotify() {
             var previewLink = info.preview_url && info.preview_url
                 ? info.preview_url
                 : 'No preview url available';
-            fs.appendFile("log.txt", "\n\r  " + operator + searchItem, (error) => {
-                console.log(operator + searchItem)
+            fs.appendFile("log.txt", "\n\r  " + "===================", (error) => {
+                console.log("===================")
             })
             fs.appendFile("log.txt","\n\r  Artist(s): " + info.album.artists[0].name,(error) => {
                     console.log("Artist(s): " + info.album.artists[0].name)
@@ -152,6 +147,9 @@ function searchSpotify() {
             })
             fs.appendFile("log.txt", "\n\r  Album: " + info.album.name, (error) => {
                 console.log("Album: " + info.album.name)
+            })
+            fs.appendFile("log.txt", "\n\r  " + "===================", (error) => {
+                console.log("===================")
             })
         });
     } //end of spotify else if statement
