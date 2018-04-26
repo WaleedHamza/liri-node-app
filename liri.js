@@ -1,13 +1,7 @@
 require("dotenv").config();
 var Request = require('request')
 var keys = require("./keys.js");
-var Twitter = require('twitter')
-var client = new Twitter({
-    consumer_key: keys.twitterKeys.consumer_key,
-    consumer_secret: keys.twitterKeys.consumer_secret,
-    access_token_key: keys.twitterKeys.access_token_key,
-    access_token_secret: keys.twitterKeys.access_token_secret
-});
+var fs = require('fs')
 // console.log('=====================');
 // console.log(' ');
 // console.log(client);
@@ -34,15 +28,35 @@ var searchItem = '';
 // console.log('');
 
 //===================twitter=========================//
-// $ curl --request GET 
-//  --url 'https://api.twitter.com/1.1/search/tweets.json?q=nasa&result_type=popular' 
-//  --header 'authorization: OAuth oauth_consumer_key="consumer-key-for-app", 
-//  oauth_nonce="generated-nonce", oauth_signature="generated-signature", 
-//  oauth_signature_method="HMAC-SHA1", oauth_timestamp="generated-timestamp", 
-//  oauth_token="access-token-for-authed-user", oauth_version="1.0"'
+// function searchTwitter(){
+//     var Twitter = require('twitter')
+//     var client = new Twitter({
+//         consumer_key: keys.twitterKeys.consumer_key,
+//         consumer_secret: keys.twitterKeys.consumer_secret,
+//         access_token_key: keys.twitterKeys.access_token_key,
+//         access_token_secret: keys.twitterKeys.access_token_secret
+//     });
+
+//     if ( operator = 'my-tweets'){ //if (searchItem === ''){searchItem = 'robertpope6789'}
+//             client.get ('statuses/created_at', { 
+//             // user_id : 'robertpope6789',
+//             screen_name: 'robertpope6789'
+//             // count: 2
+//             },
+//     function(error,response){
+//         if(error){
+//             console.log('Twitter Error', error)
+
+//         } if (!error && response.statusCode === 200){
+//             console.log('I get here')
+//         }
+//     });
 
 
-
+// }//end of if statement
+// }//end of searchTwitter Function
+//  searchTwitter();
+    
 
 //=====================OMDb============================//
 function findMovie(){
@@ -58,29 +72,40 @@ function findMovie(){
         var JASON = JSON.parse(body);
         var rotTomRating = JASON.Ratings && JASON.Ratings[1] ? JASON.Ratings[1].Value : 'No Rotten Tomatoes ratings';
          if (!error && response.statusCode === 200){
-        console.log("")
-        console.log("")
-        console.log("======================")
-        console.log("Movie Title: " + JASON.Title)
-        console.log("======================")
-        console.log("Year the movie came out: " + JASON.Year)
-        console.log("======================")
-        console.log("IMDB Rating of the movie: " + JASON.imdbRating)
-        console.log("======================")
-        console.log("Rotten Tomatoes Rating of the movie: " + rotTomRating)
-        console.log("======================")
-        console.log("Country where the movie was produced: " + JASON.Country)
-        console.log("======================")
-        console.log("Language of the movie: " + JASON.Language)
-        console.log("======================")
-        console.log("Plot of the movie: " + JASON.Plot)
-        console.log("======================")
-        console.log("Actors in the movie: " + JASON.Actors)
-        console.log("======================")
-        console.log("")
-        console.log("")
+
+            fs.appendFile("log.txt", "\n\r  " + "=====================", (error) => {
+                console.log("======================")
+            })
+            fs.appendFile("log.txt", "\n\r  " + "Movie Title: " + JASON.Title, (error) => {
+                console.log("Movie Title: " + JASON.Title)
+            })
+            fs.appendFile("log.txt", "\n\r  " + "Year the movie came out: " + JASON.Year, (error) => {
+                console.log("Year the movie came out: " + JASON.Year)
+            })
+            fs.appendFile("log.txt", "\n\r  " + "IMDB Rating of the movie: " + JASON.imdbRating, (error) => {
+                console.log("IMDB Rating of the movie: " + JASON.imdbRating)
+            })
+            fs.appendFile("log.txt", "\n\r  " + "Rotten Tomatoes Rating of the movie: " + rotTomRating, (error) => {
+                console.log("Rotten Tomatoes Rating of the movie: " + rotTomRating)
+            })
+            fs.appendFile("log.txt", "\n\r  " + "Country where the movie was produced: " + JASON.Country, (error) => {
+                console.log("Country where the movie was produced: " + JASON.Country)
+            })
+            fs.appendFile("log.txt", "\n\r  " + "Language of the movie: " + JASON.Language, (error) => {
+                console.log("Language of the movie: " + JASON.Language)
+            })
+            fs.appendFile("log.txt", "\n\r  " + "Plot of the movie: " + JASON.Plot, (error) => {
+                console.log("Plot of the movie: " + JASON.Plot)
+            })
+            fs.appendFile("log.txt", "\n\r  " + "Actors in the movie: " + JASON.Actors, (error) => {
+                console.log("Actors in the movie: " + JASON.Actors)
+            })
+            fs.appendFile("log.txt", "\n\r  " + "======================", (error) => {
+                console.log("======================")
+            }) 
+
     }else { 
-        console.log('this is not working '+error);
+        console.log('this is not working '+ error);
     }
 
 });
@@ -96,12 +121,10 @@ function searchSpotify() {
         if (searchItem === '') {
             searchItem = 'Ace of Base The Sign'
         }
-
         var Spotify = require('node-spotify-api');
         var spotify = new Spotify(
             {id: keys.spotifyKey.id, secret: keys.spotifyKey.secret}
         );
-
         spotify.search({
             type: 'track',
             query: searchItem
@@ -112,18 +135,27 @@ function searchSpotify() {
             var info = response
                 .tracks
                 .items[0];
-            var previewLink = info.preview_url && info.preview_url ? info.preview_url : 'No preview url available';
-            console.log("")
-            console.log('====================================')
-            console.log("Artist(s): " + info.album.artists[0].name)
-            console.log("Track: " + info.name)
-            console.log("Preview URL: " + previewLink);
-            console.log("Album: " + info.album.name)
-            console.log('====================================')
+            var previewLink = info.preview_url && info.preview_url
+                ? info.preview_url
+                : 'No preview url available';
+            fs.appendFile("log.txt", "\n\r  " + operator + searchItem, (error) => {
+                console.log(operator + searchItem)
+            })
+            fs.appendFile("log.txt","\n\r  Artist(s): " + info.album.artists[0].name,(error) => {
+                    console.log("Artist(s): " + info.album.artists[0].name)
+                })
+            fs.appendFile("log.txt", "\n\r  Track: " + info.name, (error) => {
+                console.log("Track: " + info.name)
+            })
+            fs.appendFile("log.txt", "\n\r  Preview URL: " + previewLink, (error) => {
+                console.log("Preview URL: " + previewLink)
+            })
+            fs.appendFile("log.txt", "\n\r  Album: " + info.album.name, (error) => {
+                console.log("Album: " + info.album.name)
+            })
         });
-
     } //end of spotify else if statement
-}//end of searchSpotify Function
+} //end of searchSpotify Function
 searchSpotify();
 
 //==============readFile=============//
