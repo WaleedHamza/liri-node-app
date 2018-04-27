@@ -3,10 +3,9 @@ var Request = require('request')
 var keys = require("./keys.js");
 var fs = require('fs')
 var data = process.argv;
-// console.log(data);
 var operator = data[2];
 var searchItem = '';
-// console.log(operator);
+
 for (var i = 3; i < data.length; i++) {
     if (i > 3 && i < data.length) {
         searchItem = searchItem + '+' + data[i];
@@ -18,7 +17,6 @@ for (var i = 3; i < data.length; i++) {
 //=====================OMDb============================//
 function findMovie() {
     if (operator === 'movie-this') {
-
         if (searchItem === '') {
             searchItem = 'Mr Nobody'
         }
@@ -37,64 +35,45 @@ function findMovie() {
                 : 'No Rotten Tomatoes ratings';
             if (!error && response.statusCode === 200) {
 
-                fs.appendFile("log.txt", "\n\r=====================", (error) => {
-                    console.log("======================")
-                })
-                fs.appendFile("log.txt", "\n\rMovie Title: " + JASON.Title, (error) => {
-                    console.log("Movie Title: " + JASON.Title)
-                })
-                fs.appendFile(
-                    "log.txt",
-                    "\n\rYear the movie came out: " + JASON.Year,
-                    (error) => {
-                        console.log("Year the movie came out: " + JASON.Year)
-                    }
-                )
-                fs.appendFile(
-                    "log.txt",
-                    "\n\rIMDB Rating of the movie: " + JASON.imdbRating,
-                    (error) => {
-                        console.log("IMDB Rating of the movie: " + JASON.imdbRating)
-                    }
-                )
-                fs.appendFile(
-                    "log.txt",
-                    "\n\rRotten Tomatoes Rating of the movie: " + rotTomRating,
-                    (error) => {
-                        console.log("Rotten Tomatoes Rating of the movie: " + rotTomRating)
-                    }
-                )
-                fs.appendFile(
-                    "log.txt",
-                    "\n\rCountry where the movie was produced: " + JASON.Country,
-                    (error) => {
-                        console.log("Country where the movie was produced: " + JASON.Country)
-                    }
-                )
-                fs.appendFile(
-                    "log.txt",
-                    "\n\rLanguage of the movie: " + JASON.Language,
-                    (error) => {
-                        console.log("Language of the movie: " + JASON.Language)
-                    }
-                )
-                fs.appendFile("log.txt", "\n\rPlot of the movie: " + JASON.Plot, (error) => {
-                    console.log("Plot of the movie: " + JASON.Plot)
-                })
-                fs.appendFile(
-                    "log.txt",
-                    "\n\rActors in the movie: " + JASON.Actors,
-                    (error) => {
-                        console.log("Actors in the movie: " + JASON.Actors)
-                    }
-                )
-                fs.appendFile("log.txt", "\n\r======================", (error) => {
-                    console.log("======================")
-                })
+                fs.appendFile("log.txt", 
+                "\n-------------------"+
+                "\nMovie Title: " + JASON.Title,(error) => { });
+                //The empty error function in the line above is to prevent the deprecating error//
+                fs.appendFile("log.txt", 
+                "\nYear the movie came out: " + JASON.Year,(error) => { });
+                
+                fs.appendFile("log.txt", 
+                "\nIMDB Rating of the movie: " + JASON.imdbRating,(error) => { });
+                
+                fs.appendFile("log.txt", 
+                "\nRotten Tomatoes Rating of the movie: " + rotTomRating,(error) => { });
+                
+                fs.appendFile("log.txt", 
+                "\nCountry where the movie was produced: " + JASON.Country,(error) => { });
+
+                fs.appendFile("log.txt", 
+                "\nLanguage of the movie: " + JASON.Language,(error) => { });
+                
+                fs.appendFile("log.txt", 
+                "\nPlot of the movie: " + JASON.Plot,(error) => { });
+                
+                fs.appendFile("log.txt", 
+                "\nActors in the movie: " + JASON.Actors +
+                "\n-------------------",(error) => { });
 
             } else {
                 console.log('this is not working ' + error);
             }
+            console.log("-------------------")
+            console.log("Movie Title: " + JASON.Title)
+            console.log("Year the movie came out: " + JASON.Year)
+            console.log("IMDB Rating of the movie: " + JASON.imdbRating)
+            console.log("Rotten Tomatoes Rating of the movie: " + rotTomRating)
+            console.log("Country where the movie was produced: " + JASON.Country)
+            console.log("Language of the movie: " + JASON.Language)
+            console.log("Plot of the movie: " + JASON.Plot)
+            console.log("Actors in the movie: " + JASON.Actors)
+            console.log("-------------------")
 
         });
     } //end of if statement
@@ -126,25 +105,28 @@ function searchSpotify() {
             var previewLink = info.preview_url && info.preview_url
                 ? info.preview_url
                 : 'No preview url available';
-            fs.appendFile("log.txt", "\n\r===================", (error) => {
-                console.log("===================")
+            fs.appendFile("log.txt", "\n-------------------", (error) => {
+                console.log("-------------------")
             })
-            fs.appendFile("log.txt","\n\rArtist(s): " + info.album.artists[0].name,(error) => {
+            fs.appendFile("log.txt",
+            "\nArtist(s): " + info.album.artists[0].name,(error) => {
                     console.log("Artist(s): " + info.album.artists[0].name)
                 })
-            fs.appendFile("log.txt", "\n\rTrack: " + info.name, (error) => {
+            fs.appendFile("log.txt", "\nTrack: " + info.name, (error) => {
                 console.log("Track: " + info.name)
             })
-            fs.appendFile("log.txt", "\n\rPreview URL: " + previewLink, (error) => {
+            fs.appendFile("log.txt", "\nPreview URL: " + previewLink, (error) => {
                 console.log("Preview URL: " + previewLink)
             })
-            fs.appendFile("log.txt", "\n\rAlbum: " + info.album.name, (error) => {
+            fs.appendFile("log.txt", "\nAlbum: " + info.album.name, (error) => {
                 console.log("Album: " + info.album.name)
             })
-            fs.appendFile("log.txt", "\n\r===================", (error) => {
-                console.log("===================")
+            fs.appendFile("log.txt", "\n-------------------", (error) => {
+                console.log("-------------------")
             })
         });
+
+        
     } //end of spotify else if statement
 } //end of searchSpotify Function
 searchSpotify();
@@ -177,13 +159,14 @@ function searchTwitter() {
         {consumer_key: keys.twitterKeys.consumer_key, consumer_secret: keys.twitterKeys.consumer_secret, access_token_key: keys.twitterKeys.access_token_key, access_token_secret: keys.twitterKeys.access_token_secret}
     );
 
-    if (operator = 'my-tweets') {
+    if (operator === 'my-tweets') {
         if (searchItem == ' ') {
             searchItem = 'robertpope6789'
         }
         var params = {
             q: 'robertpope6789',
-            count: 2 //the count is set to 2 due to the limited amount of pulls of the twitter api
+            count: 2 ,
+            //the count is set to 2 due to the limited amount of pulls of the twitter api
         }
 
         myTwitter.get('search/tweets', params, gotData)
@@ -195,22 +178,20 @@ function searchTwitter() {
             var tweets = data.statuses;
             for (var i = 0; i < tweets.length; i++) {
 
-                fs.appendFile("log.txt", "\n\r==================", (error) => {
-                    console.log("==================")
-                    console.log(tweets[i].created_at);
-                });
+                fs.appendFile("log.txt", "\n-------------------", (error) => {});
 
                 fs.appendFile(
                     "log.txt",
-                    "\n\r I Tweeted : " + tweets[i].text + "\n\r At This Time : " + tweets[i].created_at,
-                    (error) => {
-                        console.log('')
-                    });
+                    "\nI Tweeted : " + tweets[i].text + "\nAt This Time : " + tweets[i].created_at,
+                    (error) => {});
+                    
+                fs.appendFile("log.txt", "\n-------------------", (error) => {});
 
-                fs.appendFile("log.txt", "\n\r==================", (error) => {
-                    console.log(tweets[i].text);
-                    console.log("==================")
-                });
+                console.log("-------------------");
+                console.log("I Tweeted : " + tweets[i].text);
+                console.log("At This Time : " + tweets[i].created_at)
+                console.log("-------------------");
+                    
             }
 
         }

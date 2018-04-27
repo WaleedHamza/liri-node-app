@@ -15,8 +15,5 @@ exports.spotifyKey = {
 exports.OMDbAPI = {
     OMDbAPI: process.env.OMDbAPIKEY
 }
-// console.log(OMDbAPI)
 
-
-// export.defaults ={
 
