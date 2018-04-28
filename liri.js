@@ -5,7 +5,7 @@ var fs = require('fs')
 var data = process.argv;
 var operator = data[2];
 var searchItem = '';
-
+console.log(operator)
 for (var i = 3; i < data.length; i++) {
     if (i > 3 && i < data.length) {
         searchItem = searchItem + '+' + data[i];
@@ -160,22 +160,24 @@ function searchTwitter() {
     );
 
     if (operator === 'my-tweets') {
-        if (searchItem == ' ') {
+        if (searchItem == '') {
             searchItem = 'robertpope6789'
         }
+
         var params = {
-            q: 'robertpope6789',
+            q: searchItem,
             count: 2 ,
             //the count is set to 2 due to the limited amount of pulls of the twitter api
         }
 
-        myTwitter.get('search/tweets', params, gotData)
+        myTwitter.get('search/tweets',params, gotData)
 
         function gotData(error, data, response) {
             if (error) {
                 console.log('i got this far', error)
             }
             var tweets = data.statuses;
+            console.log(data)
             for (var i = 0; i < tweets.length; i++) {
 
                 fs.appendFile("log.txt", "\n-------------------", (error) => {});
