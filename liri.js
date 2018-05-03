@@ -74,7 +74,6 @@ function findMovie() {
             console.log("Plot of the movie: " + JASON.Plot)
             console.log("Actors in the movie: " + JASON.Actors)
             console.log("-------------------")
-            console.log("-------------------")
         });
     } //end of if statement
 } //end of findMovie Function
